@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Регистрация</h1>
+    <form method="post" th:action = "@{/registration_new_user}" >
+        <div class="content">
+            <div style="display: flex;">
+                <span>Имя</span>
+                <input type="text" placeholder="Иванов" required style="margin-left: 5px">
+            </div>
+            <div style="display: flex; margin-top: 10px">
+                <span>Фамилия</span>
+                <input type="text"  placeholder="Иван" required style="margin-left: 5px">
+            </div>
+            <div style="display: flex; margin-top: 10px">
+                <span>Логин</span>
+                <input type="text"  placeholder="Иван" required style="margin-left: 5px">
+            </div>
+            <div style="display: flex; margin-top: 10px">
+                <span>Пароль</span>
+                <input type="text" placeholder="Иванов" required style="margin-left: 5px">
+            </div>
+            <div style="display: flex; margin-top: 10px">
+                <span>Повторите пароль</span>
+                <input type="text"  placeholder="Иван" required style="margin-left: 5px">
+            </div>
+        </div>
+        <input type="submit" value="Регистрация" style="margin-top: 10px">
+    </form>
+</body>
+</html>
