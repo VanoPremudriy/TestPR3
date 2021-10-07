@@ -6,23 +6,23 @@
 </head>
 <body>
     <h1>Регистрация</h1>
-    <form method="post" th:action = "@{/registration_new_user}" >
+    <form th:object="${new_user}" method="post" th:action = "@{/registration_new_user}" >
         <div class="content">
             <div style="display: flex;">
                 <span>Имя</span>
-                <input type="text" placeholder="Иванов" required style="margin-left: 5px">
+                <input type="text" placeholder="Иванов" required style="margin-left: 5px" th:field="*{name}">
             </div>
             <div style="display: flex; margin-top: 10px">
                 <span>Фамилия</span>
-                <input type="text"  placeholder="Иван" required style="margin-left: 5px">
+                <input type="text"  placeholder="Иван" required style="margin-left: 5px" th:field="*{lastName}">
             </div>
             <div style="display: flex; margin-top: 10px">
                 <span>Логин</span>
-                <input type="text"  placeholder="Иван" required style="margin-left: 5px">
+                <input type="text"  placeholder="Иван" required style="margin-left: 5px" th:field="*{login}">
             </div>
             <div style="display: flex; margin-top: 10px">
                 <span>Пароль</span>
-                <input type="text" placeholder="Иванов" required style="margin-left: 5px">
+                <input type="text" placeholder="Иванов" required style="margin-left: 5px" th:field="*{password}">
             </div>
             <div style="display: flex; margin-top: 10px">
                 <span>Повторите пароль</span>

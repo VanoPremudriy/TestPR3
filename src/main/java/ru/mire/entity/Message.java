@@ -1,11 +1,17 @@
 package ru.mire.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity(name = "message")
 public class Message {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -19,4 +25,8 @@ public class Message {
 
     @Column
     private String status;
+
+    public Message(){
+
+    }
 }

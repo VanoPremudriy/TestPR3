@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Пользователь</h1>
+    <span th:text="${user_now.getName()} + '- имя'"></span> <br>
+    <span th:text="${user_now.getLastName()} + '- фамилия'"></span> <br>
+    <span th:text="${user_now.getLogin()} + '- логин'"></span> <br>
+    <span th:text="${user_now.getPassword()} + '- пароль'"></span> <br>
+</body>
+</html>
