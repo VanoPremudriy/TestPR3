@@ -5,10 +5,29 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Пользователь</h1>
-    <span th:text="${user_now.getName()} + '- имя'"></span> <br>
-    <span th:text="${user_now.getLastName()} + '- фамилия'"></span> <br>
-    <span th:text="${user_now.getLogin()} + '- логин'"></span> <br>
-    <span th:text="${user_now.getPassword()} + '- пароль'"></span> <br>
+    <h1>Профиль</h1>
+
+    <span th:text="${user_now.getName()} + ' ' + ${user_now.getLastName()}" style="font-size: 20px;"></span>
+    <div style="border: solid 1px black; width: 350px">
+        <h2>Друзья</h2>
+        <div th:each="friend: ${friends}" style="display: flex">
+            <span th:text="${friend.getName()} + ' ' + ${friend.getLastName()}" style="display: block; width: 150px"></span>
+            <form method="post" th:action="@{/delete_friend}">
+                <input hidden name="id1" th:value="${friend.getId()}" th:name="id1">
+                <input type="submit" value="Удалить из друзей">
+            </form>
+        </div>
+    </div>
+
+    <div style="margin-left: 80%; border: solid 1px black; height: 200px; width: 350px">
+        <h2>Пользователи онлайн</h2>
+        <div th:each="user: ${users}" style="display: flex">
+            <span th:text="${user.getName()} + ' ' + ${user.getLastName()}" style="display: block; width: 150px"></span>
+            <form method="post" th:action="@{/add_friend}">
+                <input hidden name="id1" th:value="${user.getId()}" th:name="id1">
+                <input type="submit" value="Добавить в друзья">
+            </form>
+        </div>
+    </div>
 </body>
 </html>
