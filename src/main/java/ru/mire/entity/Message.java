@@ -18,8 +18,6 @@ public class Message {
     @Column
     private String mess;
 
-    @Column
-    private String status;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "recipient_id")
@@ -30,7 +28,12 @@ public class Message {
     @JoinColumn(name = "sender_id")
     private User sender;
 
+    public Message(Long id, String mess, User sender, User recipient){
+        this.id = id;
+        this.mess = mess;
+        this.sender = sender;
+        this.recipient = recipient;
+    }
     public Message(){
-
     }
 }

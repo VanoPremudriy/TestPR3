@@ -29,6 +29,8 @@ public class AuthorizationController {
 
     User userNow;
 
+    User chatUser;
+
     @GetMapping(value = {"/","/authorization"})
     public String authorization(@ModelAttribute("that_user") User thatUser){
         return "/authorization";
@@ -110,6 +112,34 @@ public class AuthorizationController {
     }
 
 
+    @GetMapping(value = "/messenger")
+    public String messenger(@ModelAttribute("new_message") Message newMessage, Long id1, Model mod1,  Model chatMessages, Model un){
+        mod1.addAttribute("id1", id1);
+        un.addAttribute("user_now", userNow);
+        chatUser = userRepo.getUserById(id1);
+        ArrayList<Message> userNowMessages = (ArrayList<Message>) messageRepo.findAllBySenderAndRecipient(userNow, chatUser);
+        ArrayList<Message> chatUserMessages = (ArrayList<Message>) messageRepo.findAllBySenderAndRecipient(chatUser, userNow);
+
+        ArrayList<Message> messages = new ArrayList<>();
+
+        messages.addAll(userNowMessages);
+        messages.addAll(chatUserMessages);
+
+        messages.sort((o1, o2) -> o1.getId().compareTo(o2.getId()));
+
+        chatMessages.addAttribute("messages", messages);
+
+        return "/messenger";
+    }
+
+    @PostMapping(value = "/send_message")
+    public String sendMessage(@ModelAttribute("new_message") Message newMessage){
+        System.out.println(newMessage.getMess());
+        AtomicInteger i = new AtomicInteger();
+        messageRepo.findAll().forEach(message -> i.getAndIncrement());
+        messageRepo.save(new Message((long) i.get()+1, newMessage.getMess(), userNow, chatUser));
+        return "redirect:/messenger?id1=" + chatUser.getId();
+    }
 
 
     @GetMapping(value = "/registration")
@@ -119,7 +149,6 @@ public class AuthorizationController {
 
     @PostMapping(value = "/registration_new_user")
     public String registrationNewUser(@ModelAttribute("new_user") User newUser){
-        System.out.println(newUser);
         userRepo.save(newUser);
         return "redirect:/authorization";
     }

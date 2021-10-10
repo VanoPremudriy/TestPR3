@@ -16,6 +16,10 @@
                 <input hidden name="id1" th:value="${friend.getId()}" th:name="id1">
                 <input type="submit" value="Удалить из друзей">
             </form>
+            <form method="get" th:action="@{/messenger}">
+                <input hidden name="id1" th:value="${friend.getId()}" th:name="id1">
+                <input type="submit" value="Написать">
+            </form>
         </div>
     </div>
 
