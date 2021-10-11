@@ -1,4 +1,4 @@
-package ru.mire.entity;
+package ru.mire.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -6,6 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.mire.entity.Friends;
+import ru.mire.entity.Message;
+import ru.mire.entity.User;
 import ru.mire.repository.FriendsRepo;
 import ru.mire.repository.MessageRepo;
 import ru.mire.repository.UserRepo;
@@ -16,7 +19,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Controller
-public class AuthorizationController {
+public class DefaultController {
 
     @Autowired
     UserRepo userRepo;
@@ -113,7 +116,7 @@ public class AuthorizationController {
 
 
     @GetMapping(value = "/messenger")
-    public String messenger(@ModelAttribute("new_message") Message newMessage, Long id1, Model mod1,  Model chatMessages, Model un){
+    public String messenger(@ModelAttribute("new_message") Message newMessage, Long id1, Model mod1, Model chatMessages, Model un){
         mod1.addAttribute("id1", id1);
         un.addAttribute("user_now", userNow);
         chatUser = userRepo.getUserById(id1);
@@ -151,5 +154,17 @@ public class AuthorizationController {
     public String registrationNewUser(@ModelAttribute("new_user") User newUser){
         userRepo.save(newUser);
         return "redirect:/authorization";
+    }
+
+    @GetMapping(value = "exit")
+    public String exit(){
+        userNow = null;
+        return "redirect:/authorization";
+    }
+
+    @GetMapping(value = "exit_messenger")
+    public String exitMessenger(){
+        chatUser = null;
+        return "redirect:/profile";
     }
 }
